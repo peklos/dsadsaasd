@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Minimal Design</title>
+    <style>
+      /* Базовые стили */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Helvetica Neue", Arial, sans-serif;
+      }
+
+      body {
+        background-color: #f8f8f8;
+        color: #333;
+        line-height: 1.618; /* Золотое сечение для межстрочного интервала */
+      }
+
+      .container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      /* Шапка */
+      header {
+        background-color: #fff;
+        padding: 20px 0;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      }
+
+      .header-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        font-size: 24px;
+        font-weight: 700;
+        color: #222;
+      }
+
+      nav ul {
+        display: flex;
+        list-style: none;
+      }
+
+      nav ul li {
+        margin-left: 30px;
+      }
+
+      nav ul li a {
+        text-decoration: none;
+        color: #555;
+        font-weight: 500;
+        transition: color 0.3s;
+      }
+
+      nav ul li a:hover {
+        color: #000;
+      }
+
+      .contacts {
+        display: flex;
+        align-items: center;
+      }
+
+      .phone {
+        margin-left: 20px;
+        color: #555;
+      }
+
+      /* Основной контент */
+      .main-content {
+        padding: 60px 0;
+      }
+
+      .hero {
+        margin-bottom: 60px;
+        text-align: center;
+      }
+
+      .hero h1 {
+        font-size: 48px;
+        margin-bottom: 20px;
+        font-weight: 300;
+      }
+
+      .hero p {
+        font-size: 18px;
+        color: #666;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      /* Сетка услуг */
+      .services {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+        margin-bottom: 60px;
+      }
+
+      .service-card {
+        background: #fff;
+        padding: 30px;
+        border-radius: 4px;
+        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+
+      .service-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+      }
+
+      .service-card h3 {
+        font-size: 20px;
+        margin-bottom: 15px;
+        font-weight: 500;
+      }
+
+      .service-card p {
+        color: #666;
+        margin-bottom: 20px;
+      }
+
+      .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        background: #222;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 4px;
+        transition: background 0.3s;
+      }
+
+      .btn:hover {
+        background: #000;
+      }
+
+      /* Галерея */
+      .gallery {
+        margin-bottom: 60px;
+      }
+
+      .gallery h2 {
+        text-align: center;
+        margin-bottom: 30px;
+        font-weight: 300;
+        font-size: 32px;
+      }
+
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+      }
+
+      .gallery-item {
+        height: 200px;
+        background: #ddd;
+        border-radius: 4px;
+        overflow: hidden;
+      }
+
+      /* Форма обратной связи */
+      .contact-form {
+        background: #fff;
+        padding: 40px;
+        border-radius: 4px;
+        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+        margin-bottom: 60px;
+      }
+
+      .contact-form h2 {
+        text-align: center;
+        margin-bottom: 30px;
+        font-weight: 300;
+        font-size: 32px;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        color: #555;
+      }
+
+      .form-group input,
+      .form-group textarea {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 16px;
+      }
+
+      .form-group textarea {
+        height: 120px;
+      }
+
+      .submit-btn {
+        display: block;
+        width: 100%;
+        padding: 15px;
+        background: #222;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background 0.3s;
+      }
+
+      .submit-btn:hover {
+        background: #000;
+      }
+
+      /* Статьи */
+      .articles {
+        margin-bottom: 60px;
+      }
+
+      .articles h2 {
+        text-align: center;
+        margin-bottom: 30px;
+        font-weight: 300;
+        font-size: 32px;
+      }
+
+      .articles-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+      }
+
+      .article-card {
+        background: #fff;
+        border-radius: 4px;
+        overflow: hidden;
+        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+        transition: transform 0.3s;
+      }
+
+      .article-card:hover {
+        transform: translateY(-5px);
+      }
+
+      .article-image {
+        height: 180px;
+        background-size: cover;
+        background-position: center;
+      }
+
+      .article-content {
+        padding: 25px;
+      }
+
+      .article-content h3 {
+        font-size: 18px;
+        margin-bottom: 10px;
+        font-weight: 500;
+      }
+
+      .meta {
+        color: #888;
+        font-size: 14px;
+        margin-bottom: 15px;
+      }
+
+      .article-content p {
+        color: #666;
+        margin-bottom: 20px;
+        font-size: 15px;
+      }
+
+      .read-more {
+        color: #222;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 15px;
+        transition: color 0.3s;
+      }
+
+      .read-more:hover {
+        color: #000;
+      }
+
+      /* Подвал */
+      footer {
+        background: #222;
+        color: #fff;
+        padding: 60px 0 30px;
+      }
+
+      .footer-content {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 40px;
+        margin-bottom: 40px;
+      }
+
+      .footer-column h3 {
+        font-size: 18px;
+        margin-bottom: 20px;
+        font-weight: 500;
+      }
+
+      .footer-column ul {
+        list-style: none;
+      }
+
+      .footer-column ul li {
+        margin-bottom: 10px;
+      }
+
+      .footer-column ul li a {
+        color: #bbb;
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+
+      .footer-column ul li a:hover {
+        color: #fff;
+      }
+
+      .social-links {
+        display: flex;
+        margin-top: 20px;
+      }
+
+      .social-links a {
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        background: #333;
+        border-radius: 50%;
+        margin-right: 10px;
+        text-align: center;
+        line-height: 40px;
+        color: #fff;
+        transition: background 0.3s;
+      }
+
+      .social-links a:hover {
+        background: #555;
+      }
+
+      .copyright {
+        text-align: center;
+        color: #bbb;
+        padding-top: 30px;
+        border-top: 1px solid #444;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Шапка -->
+    <header>
+      <div class="container header-content">
+        <div class="logo">Minimal</div>
+        <nav>
+          <ul>
+            <li><a href="#">Главная</a></li>
+            <li><a href="#">Услуги</a></li>
+            <li><a href="#">Галерея</a></li>
+            <li><a href="#">Контакты</a></li>
+          </ul>
+        </nav>
+        <div class="contacts">
+          <div class="phone">+7 (123) 456-78-90</div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Основной контент -->
+    <main class="main-content">
+      <div class="container">
+        <!-- Герой -->
+        <section class="hero">
+          <h1>Минимализм в каждом пикселе</h1>
+          <p>
+            Мы создаем простые и элегантные решения для вашего бизнеса,
+            используя принципы золотого сечения и чистый дизайн.
+          </p>
+        </section>
+
+        <!-- Услуги -->
+        <section class="services">
+          <article class="service-card">
+            <h3>Веб-дизайн</h3>
+            <p>
+              Создаем чистые и функциональные интерфейсы с акцентом на удобство
+              пользователя.
+            </p>
+            <a href="#" class="btn">Подробнее</a>
+          </article>
+          <article class="service-card">
+            <h3>Разработка</h3>
+            <p>
+              Современные технологии и качественный код для надежных решений.
+            </p>
+            <a href="#" class="btn">Подробнее</a>
+          </article>
+          <article class="service-card">
+            <h3>Брендинг</h3>
+            <p>
+              Разрабатываем узнаваемые и минималистичные визуальные
+              идентичности.
+            </p>
+            <a href="#" class="btn">Подробнее</a>
+          </article>
+        </section>
+
+        <!-- Галерея -->
+        <section class="gallery">
+          <h2>Наши работы</h2>
+          <div class="gallery-grid">
+            <div class="gallery-item"></div>
+            <div class="gallery-item"></div>
+            <div class="gallery-item"></div>
+            <div class="gallery-item"></div>
+            <div class="gallery-item"></div>
+            <div class="gallery-item"></div>
+            <div class="gallery-item"></div>
+            <div class="gallery-item"></div>
+          </div>
+        </section>
+
+        <!-- Форма обратной связи -->
+        <section class="contact-form">
+          <h2>Свяжитесь с нами</h2>
+          <form>
+            <div class="form-group">
+              <label for="name">Ваше имя</label>
+              <input type="text" id="name" required />
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" required />
+            </div>
+            <div class="form-group">
+              <label for="message">Сообщение</label>
+              <textarea id="message" required></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Отправить</button>
+          </form>
+        </section>
+
+        <!-- Статьи -->
+        <section class="articles">
+          <h2>Полезные статьи</h2>
+          <div class="articles-grid">
+            <article class="article-card">
+              <div
+                class="article-image"
+                style="background-color: #e0e0e0"
+              ></div>
+              <div class="article-content">
+                <h3>Принципы минимализма в веб-дизайне</h3>
+                <p class="meta">15 мая 2023 • 5 мин чтения</p>
+                <p>
+                  Как сократить элементы до самого необходимого без потери
+                  функциональности...
+                </p>
+                <a href="#" class="read-more">Читать →</a>
+              </div>
+            </article>
+            <article class="article-card">
+              <div
+                class="article-image"
+                style="background-color: #e0e0e0"
+              ></div>
+              <div class="article-content">
+                <h3>Золотое сечение: математика красоты</h3>
+                <p class="meta">22 апреля 2023 • 7 мин чтения</p>
+                <p>
+                  Почему пропорции 1:1.618 считаются идеальными и как применять
+                  их в дизайне...
+                </p>
+                <a href="#" class="read-more">Читать →</a>
+              </div>
+            </article>
+            <article class="article-card">
+              <div
+                class="article-image"
+                style="background-color: #e0e0e0"
+              ></div>
+              <div class="article-content">
+                <h3>Типографика в минималистичных интерфейсах</h3>
+                <p class="meta">10 марта 2023 • 6 мин чтения</p>
+                <p>
+                  Как выбрать шрифты и настроить вертикальный ритм для чистого
+                  дизайна...
+                </p>
+                <a href="#" class="read-more">Читать →</a>
+              </div>
+            </article>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Подвал -->
+    <footer>
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-column">
+            <h3>Контакты</h3>
+            <ul>
+              <li>г. Москва, ул. Примерная, 123</li>
+              <li>+7 (123) 456-78-90</li>
+              <li>info@example.com</li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h3>Ссылки</h3>
+            <ul>
+              <li><a href="#">Главная</a></li>
+              <li><a href="#">Услуги</a></li>
+              <li><a href="#">Галерея</a></li>
+              <li><a href="#">Блог</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h3>Соцсети</h3>
+            <div class="social-links">
+              <a href="#">F</a>
+              <a href="#">I</a>
+              <a href="#">T</a>
+              <a href="#">V</a>
+            </div>
+          </div>
+        </div>
+        <div class="copyright">
+          &copy; 2023 Minimal Design. Все права защищены.
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
